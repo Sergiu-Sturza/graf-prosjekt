@@ -2,6 +2,7 @@
 
 ```mermaid
 classDiagram
+    direction LR
     class Graf {
         -bool retta
         -vector~Node*~ noder
@@ -12,13 +13,13 @@ classDiagram
         +leggTilKant(int fraID, int tilID, int vekt) bool
         +slettNode(int ID) bool
         +slettKant(int fraID, int tilID) bool
-        +finnNode(int ID) Node*
+        +finnNode(int ID) Node∗
         +harKant(int fraID, int tilID) bool
         +naboer(int ID) vector~int~
         +minimaltSpenntrePrim(int startID) Graf
         +minimaltSpenntreKruskal() Graf
         +kortesteVeiTre(int startID, map* avstand) Graf
-        -finnKant(int fraID, int tilID) Kant*
+        -finnKant(int fraID, int tilID) Kant∗
         -slettKantObjekt(Kant* kant) void
     }
     class Node {
@@ -35,10 +36,10 @@ classDiagram
         -Node* til
         -int vekt
         +Kant(Node* fra, Node* til, int vekt)
-        +hentFra() Node*
-        +hentTil() Node*
+        +hentFra() Node∗
+        +hentTil() Node∗
         +hentVekt() int
-        +annenEnde(Node* node) Node*
+        +annenEnde(Node* node) Node∗
     }
     Graf "1" *-- "0..*" Node : eier
     Graf "1" *-- "0..*" Kant : eier
