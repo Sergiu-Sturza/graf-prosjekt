@@ -1,0 +1,62 @@
+Testresultater - Laboppgave 2 (grafer)
+Kompilert med: g++ -std=c++17 -Wall -Wextra -Wpedantic -fsanitize=address,undefined -Iinclude src/*.cpp tests/testsett.cpp
+AddressSanitizer og UBSan ga ingen meldinger (ingen minnelekkasjer eller udefinert oppførsel).
+Noder A-E i testsettet har ID 1-5.
+
+Test 1: Legge til og fjerne noder
+  [OK]   1.1 grafen har fem noder
+  [OK]   1.1 nodene har ID 1, 2, 3, 4, 5
+  [OK]   1.2 grafen har fire noder etter sletting
+  [OK]   1.2 node 3 er ikke til stede
+  [OK]   1.2 gjenværende noder er 1, 2, 4, 5
+
+Test 2: Legge til og fjerne kanter
+  [OK]   2.1 node 1 har naboene 2 og 3
+  [OK]   2.1 node 2 har naboene 1 og 4
+  [OK]   2.1 node 3 har naboene 1 og 5
+  [OK]   2.1 grafen har fire kanter
+  [OK]   2.2 node 1 har nå bare naboen 2
+  [OK]   2.2 node 3 har nå bare naboen 5
+  [OK]   2.2 grafen har tre kanter
+
+Test 3: Minimalt spenntre
+  [OK]   3.1 Prim: kantene er A-B(1), B-C(1), D-E(2), B-D(4)
+  [OK]   3.1 Prim: total vekt er 8
+  [OK]   3.1 Prim: 5 noder og 4 kanter
+  [OK]   3.1 Prim fra C gir samme spenntre
+  [OK]   3.2 Kruskal: samme kanter som Prim
+  [OK]   3.2 Kruskal: total vekt er 8
+  [OK]   3.x originalgrafen er uendret (5 noder, 7 kanter, vekt 22)
+
+Test 4: Korteste vei (Dijkstra)
+  [OK]   4.1 treet har kantene A-C(2), C-E(3), E-D(4), A-B(4)
+  [OK]   4.1 avstand til B er 4
+  [OK]   4.1 avstand til C er 2
+  [OK]   4.1 avstand til D er 9 (via C og E)
+  [OK]   4.1 avstand til E er 5 (via C)
+  [OK]   4.x originalgrafen er uendret
+
+Test 5: Robusthet
+  [OK]   5.1 andre forsøk på å legge til ID 6 avvises
+  [OK]   5.1 grafen har bare én node med ID 6
+  [OK]   5.1 sletting av ikke-eksisterende node gir ingen feil
+  [OK]   5.1 grafen er tom
+  [OK]   5.1 sletting av ikke-eksisterende kant gir ingen feil
+  [OK]   5.2 alle kanter slettet, nodene er igjen
+  [OK]   5.2 alle noder slettet, grafen er tom
+  [OK]   5.2 sletting av noder fjerner også kantene (tom graf, 0 kanter)
+
+Ekstra: retta grafer (Del 2 og 3c)
+  [OK]   R.1 kantene går bare én vei
+  [OK]   R.2 kanten 1->2 finnes, 2->1 finnes ikke
+  [OK]   R.3 sletting av kant i feil retning avvises
+  [OK]   R.4 motsatt retning kan legges til som egen kant
+  [OK]   R.5 sletting av node fjerner både inngående og utgående kanter
+  [OK]   R.6 Dijkstra-treet er også retta
+  [OK]   R.6 Dijkstra følger kantretningen (1->2->3 er kortere enn 1->3)
+  [OK]   R.6 node 4 kan ikke nås fra 1 og er ikke med
+  [OK]   R.7 minimalt spenntre på retta graf avvises med unntak
+  [OK]   R.8 negative vekter avvises i Dijkstra
+  [OK]   R.9 resultatgrafen er uavhengig av originalen
+
+Resultat: 44 OK, 0 feil
